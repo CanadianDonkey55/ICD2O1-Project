@@ -214,6 +214,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &707930366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 707930367}
+  m_Layer: 0
+  m_Name: BossSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &707930367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707930366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.12, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1489783316
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,8 +255,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1489783318}
   - component: {fileID: 1489783317}
-  - component: {fileID: 1489783319}
   - component: {fileID: 1489783320}
+  - component: {fileID: 1489783322}
+  - component: {fileID: 1489783321}
   m_Layer: 0
   m_Name: Immune system
   m_TagString: ImmuneSystem
@@ -301,21 +333,6 @@ Transform:
   - {fileID: 1596464862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1489783319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489783316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b423d086eaa274c835c87f0fd0e38d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7805367317077716070, guid: ff6fc40b74a988c4798d79745f9c2baa, type: 3}
-  bulletSpawnPoint: {fileID: 1596464862}
-  health: 10
 --- !u!58 &1489783320
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -351,6 +368,48 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1489783321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489783316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b423d086eaa274c835c87f0fd0e38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7805367317077716070, guid: ff6fc40b74a988c4798d79745f9c2baa, type: 3}
+  bulletSpawnPoint: {fileID: 1596464862}
+  health: 10
+--- !u!50 &1489783322
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489783316}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 3
 --- !u!1 &1596464861
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +440,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1489783318}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1964084504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964084506}
+  - component: {fileID: 1964084505}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1964084505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964084504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3248c98e75e6f34990fb02cb0033a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hardEnemyCountdown: 60
+  eliteEnemyCountdown: 180
+  hardEnemiesCanSpawn: 0
+  eliteEnemiesCanSpawn: 0
+  immuneSystem: {fileID: 0}
+  doubleShotCountdown: 100
+  wideShotCountdown: 200
+  increasedHealth: 210
+--- !u!4 &1964084506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964084504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2459047, y: 0.5498054, z: -9.95526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2048258351
 GameObject:
@@ -426,7 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0c1e70370128642b9fcbc78358336a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6959807347924518100, guid: 9e6dc40830475a74ea5ab4b350659d05, type: 3}
+  basicEnemyPrefab: {fileID: 6959807347924518100, guid: 9e6dc40830475a74ea5ab4b350659d05, type: 3}
+  hardEnemyPrefab: {fileID: 3722295449276280482, guid: 5fb79957b5a16a248b86d5dd1548e4d6, type: 3}
   radius: 11
   center: {x: 0, y: 0}
   spawnInterval: 2
@@ -438,3 +550,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1489783318}
   - {fileID: 2048258352}
+  - {fileID: 1964084506}
+  - {fileID: 707930367}

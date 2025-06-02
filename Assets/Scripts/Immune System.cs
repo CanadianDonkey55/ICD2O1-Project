@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ImmuneSystem : MonoBehaviour
 {
@@ -34,8 +35,10 @@ public class ImmuneSystem : MonoBehaviour
         // Check for mouse click and clone the bullet prefab
         if (Input.GetMouseButtonDown(0))
         {
-            Console.WriteLine("pew pew");
             Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
         }
+
+        // Check for death
+        if (health <= 0) SceneManager.LoadScene(2);
     }
 }

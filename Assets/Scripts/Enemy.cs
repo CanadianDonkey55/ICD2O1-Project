@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float health = 2f;
     public float speed = 2f;
@@ -27,11 +27,13 @@ public class BasicEnemy : MonoBehaviour
         if (collision.tag == "Cell")
         {
             health -= collision.GetComponent<Cell>().damage;
+            Destroy(collision.gameObject);
         }
 
         if (collision.tag == "ImmuneSystem")
         {
             collision.GetComponent<ImmuneSystem>().health -= damage;
+            Destroy(gameObject);
         }
     }
 }

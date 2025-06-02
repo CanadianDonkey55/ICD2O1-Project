@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject basicEnemyPrefab;
+    public GameObject hardEnemyPrefab;
+
     public float radius = 11f;
     public Vector2 center = Vector2.zero;
     public float spawnInterval = 2f;
@@ -24,6 +26,6 @@ public class EnemySpawning : MonoBehaviour
         Vector2 spawnPosition = center + new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * radius;
 
         // Instantiate 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(hardEnemyPrefab, spawnPosition, Quaternion.identity);
     }
 }

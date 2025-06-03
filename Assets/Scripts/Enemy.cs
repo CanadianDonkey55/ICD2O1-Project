@@ -17,14 +17,17 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Reference to the gameManager
         gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Move towards the center(where the immuneSystem is)
         transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, speed * Time.deltaTime);
 
+        // When the health reaches 0, give the player some points and destroy the enemy
         if (health == 0)
         {
             gameManager.currentScore += points;

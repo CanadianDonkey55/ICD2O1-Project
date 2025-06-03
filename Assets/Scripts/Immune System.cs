@@ -12,17 +12,20 @@ public class ImmuneSystem : MonoBehaviour
 
     [Header("Damage")]
     public float health = 10f;
+    public float increasedHealth = 15f;
+    public bool doubleShot = false;
+    public float secondShotDelay = 0.3f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // Get mouse position in world coordinates
+        // Get mouse position in world space
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Calculate direction from object to mouse
@@ -35,10 +38,25 @@ public class ImmuneSystem : MonoBehaviour
         // Check for mouse click and clone the bullet prefab
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+            if (doubleShot)
+            {
+                StartCoroutine(DoubleShotCoroutine());
+            }
+            else
+            {
+                Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+            }
         }
 
         // Check for death
         if (health <= 0) SceneManager.LoadScene(2);
+    }
+
+    // Coroutine for double shot
+    private IEnumerator DoubleShotCoroutine()
+    {
+        Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+        yield return new WaitForSeconds(secondShotDelay);
+        Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
     }
 }

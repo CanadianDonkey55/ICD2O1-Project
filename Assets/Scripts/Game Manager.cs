@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] ImmuneSystem immuneSystem;
     [SerializeField] float doubleShotCountdown = 100f;
     [SerializeField] float wideShotCountdown = 200f;
-    [SerializeField] float increasedHealth = 210f;
+    [SerializeField] float increasedHealthCountdown = 210f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,20 +33,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Make sure the score text is always showing the current score
         scoreText.text = currentScore.ToString();
 
         // Increase time based on deltaTime
         currentTime += Time.deltaTime;
         
+        // If the amount of time the game has been running for is higher than the hardEnemyCountdown, allow hard enemies to spawn
         if (currentTime >= hardEnemyCountdown)
         {
             hardEnemiesCanSpawn = true;
         }
 
+        // If the amount of time the game has been running for is higher than the eliteEnemyCountdown, allow elite enemies to spawn
         if (currentTime >= eliteEnemyCountdown)
         {
             eliteEnemiesCanSpawn = true;
             spawner.basicEnemySpawnChance = spawner.lowerBasicEnemySpawnChance;
+        }
+
+        // If the amount of time the game has been running for is higher than the doubleShotCountdown, turn on doubleShot and increase the enemy spawn frequency
+        if (currentTime >= doubleShotCountdown)
+        {
+            immuneSystem.doubleShot = true;
+            spawner.spawnInterval = spawner.reducedSpawnInterval;
+        }
+
+        // If the amount of time the game has been running for is higher than the increasedHealthCountdown, increase player health
+        if (currentTime >= increasedHealthCountdown)
+        {
+            immuneSystem.health = immuneSystem.increasedHealth;
         }
     }
 }

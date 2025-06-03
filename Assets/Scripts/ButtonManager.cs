@@ -22,11 +22,6 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void RestartButton()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     public void QuitButton()
     {
         Application.Quit();

@@ -16,6 +16,7 @@ public class EnemySpawning : MonoBehaviour
     public float radius = 11f;
     private Vector2 center;
     public float spawnInterval = 2f;
+    public float reducedSpawnInterval = 1.5f;
     public float startTime = 3f;
 
     [Header("Spawn Chances")]
@@ -67,7 +68,5 @@ public class EnemySpawning : MonoBehaviour
         {
             currentSpawn = eliteEnemyPrefab;
         }
-
-        Debug.Log(randomValue);
     }
 }

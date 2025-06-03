@@ -10,6 +10,7 @@ public class Cell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Cause the cell to move in a straight line
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * 5, ForceMode2D.Impulse);
     }
@@ -17,6 +18,7 @@ public class Cell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 10);
+        // Makes sure there aren't too may cells in the scene to reduce lag
+        Destroy(gameObject, 5);
     }
 }

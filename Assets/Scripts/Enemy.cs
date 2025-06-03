@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public float damage = 1f;
 
     [Header("Scorekeeping")]
-    public int points = 1;
+    public float points = 1;
     public GameObject gameManagerObject;
     GameManager gameManager;
 
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, speed * Time.deltaTime);
 
         // When the health reaches 0, give the player some points and destroy the enemy
-        if (health == 0)
+        if (health <= 0)
         {
             gameManager.currentScore += points;
             Destroy(gameObject);
@@ -37,12 +37,14 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Take damage on collision with Cell and destroy the Cell
         if (collision.tag == "Cell")
         {
             health -= collision.GetComponent<Cell>().damage;
             Destroy(collision.gameObject);
         }
 
+        // Deal damage to the ImmuneSystem on collision and destroy this enemy
         if (collision.tag == "ImmuneSystem")
         {
             collision.GetComponent<ImmuneSystem>().health -= damage;

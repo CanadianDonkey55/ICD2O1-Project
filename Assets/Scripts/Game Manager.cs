@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int currentScore = 0;
+    bool hasWon = false;
+
+    [Header("Scoring")]
+    public float currentScore = 0;
+    [SerializeField] float winScore = 500f;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] GameObject winScreen;
 
     [Header("Difficulty Timers")]
     [SerializeField] float hardEnemyCountdown = 60f;
@@ -22,12 +27,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] ImmuneSystem immuneSystem;
     [SerializeField] float doubleShotCountdown = 100f;
     [SerializeField] float wideShotCountdown = 200f;
-    [SerializeField] float increasedHealthCountdown = 210f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -59,10 +63,20 @@ public class GameManager : MonoBehaviour
             spawner.spawnInterval = spawner.reducedSpawnInterval;
         }
 
-        // If the amount of time the game has been running for is higher than the increasedHealthCountdown, increase player health
-        if (currentTime >= increasedHealthCountdown)
+        // If the amount of time the game has been running for is higher than the wideShotCountdown, turn on wideShot
+        if (currentTime >= wideShotCountdown)
         {
-            immuneSystem.health = immuneSystem.increasedHealth;
+            immuneSystem.wideShot = true;
+        }
+
+        // Check for win
+        if (currentScore >= winScore && !hasWon)
+        {
+            winScreen.SetActive(true);
+            immuneSystem.health += immuneSystem.increasedHealth;
+            immuneSystem.healthBar.maxValue = immuneSystem.healthBar.maxValue + immuneSystem.increasedHealth;
+            hasWon = true;
+            Time.timeScale = 0;
         }
     }
 }

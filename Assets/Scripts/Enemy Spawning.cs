@@ -19,6 +19,7 @@ public class EnemySpawning : MonoBehaviour
     public float spawnInterval = 2f;
     public float reducedSpawnInterval = 1.5f;
     public float startTime = 3f;
+    public bool bossExists = false;
 
     [Header("Spawn Chances")]
     [Range(0f, 75f)]
@@ -59,6 +60,7 @@ public class EnemySpawning : MonoBehaviour
         if (gameManager.bossCanSpawn)
         {
             Instantiate(currentSpawn, spawnPosition, Quaternion.identity);
+            bossExists = true;
             gameManager.bossCanSpawn = false; // Reset the boss spawn flag after spawning
         }
     }

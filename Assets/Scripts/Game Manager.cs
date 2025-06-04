@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             immuneSystem.wideShot = true;
         }
 
-        if (currentScore >= bossEnemyPointsNeeded && !bossCanSpawn)
+        if (currentScore >= bossEnemyPointsNeeded && !bossCanSpawn && !spawner.bossExists)
         {
             bossCanSpawn = true;
         }

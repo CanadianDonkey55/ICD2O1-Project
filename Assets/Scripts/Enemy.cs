@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] TMP_Text healthText;
+
     [Header("Stats")]
     public float health = 2f;
     public float speed = 2f;
@@ -25,6 +29,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthText.text = health.ToString();
+
         // Move towards the center(where the immuneSystem is)
         transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, speed * Time.deltaTime);
 
@@ -33,6 +39,7 @@ public class Enemy : MonoBehaviour
         {
             if (isBoss) gameManager.bossDefeated = true;
             gameManager.currentScore += points;
+            AudioSource.PlayClipAtPoint(deathSound, transform.position, 100);
             Destroy(gameObject);
         }
     }

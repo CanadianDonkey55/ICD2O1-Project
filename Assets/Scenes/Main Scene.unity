@@ -2194,14 +2194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3248c98e75e6f34990fb02cb0033a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossDefeated: 0
   currentScore: 0
   winScore: 500
   scoreText: {fileID: 2058918571}
   winScreen: {fileID: 23181134}
   hardEnemyCountdown: 60
   eliteEnemyCountdown: 180
+  bossEnemyPointsNeeded: 450
   hardEnemiesCanSpawn: 0
   eliteEnemiesCanSpawn: 0
+  bossCanSpawn: 0
   spawner: {fileID: 2048258353}
   immuneSystem: {fileID: 1489783321}
   doubleShotCountdown: 240
@@ -2305,10 +2308,11 @@ MonoBehaviour:
   basicEnemyPrefab: {fileID: 6959807347924518100, guid: 9e6dc40830475a74ea5ab4b350659d05, type: 3}
   hardEnemyPrefab: {fileID: 3722295449276280482, guid: 5fb79957b5a16a248b86d5dd1548e4d6, type: 3}
   eliteEnemyPrefab: {fileID: 1753653028989327941, guid: 35fac02c3ed5f6c47b632cdd47ad73ed, type: 3}
+  bossEnemyprefab: {fileID: 9015510921699069957, guid: 17d3d6a753dea5846a22f89ea2659830, type: 3}
   currentSpawn: {fileID: 0}
   radius: 11
-  spawnInterval: 2
-  reducedSpawnInterval: 1.5
+  spawnInterval: 1.5
+  reducedSpawnInterval: 1
   startTime: 3
   basicEnemySpawnChance: 35
   hardEnemySpawnChance: 60

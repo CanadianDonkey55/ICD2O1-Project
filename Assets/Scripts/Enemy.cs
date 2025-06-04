@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float health = 2f;
     public float speed = 2f;
     public float damage = 1f;
+    [SerializeField] bool isBoss = false;
 
     [Header("Scorekeeping")]
     public float points = 1;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
         // When the health reaches 0, give the player some points and destroy the enemy
         if (health <= 0)
         {
+            if (isBoss) gameManager.bossDefeated = true;
             gameManager.currentScore += points;
             Destroy(gameObject);
         }

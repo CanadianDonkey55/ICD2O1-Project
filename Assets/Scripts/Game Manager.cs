@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     bool hasWon = false;
+    public bool bossDefeated = false;
 
     [Header("Scoring")]
     public float currentScore = 0;
@@ -16,11 +17,13 @@ public class GameManager : MonoBehaviour
     [Header("Difficulty Timers")]
     [SerializeField] float hardEnemyCountdown = 60f;
     [SerializeField] float eliteEnemyCountdown = 180f;
+    [SerializeField] float bossEnemyPointsNeeded = 450f;
     float currentTime = 0f;
 
     [Header("Enemy Difficulty")]
     public bool hardEnemiesCanSpawn = false;
     public bool eliteEnemiesCanSpawn = false;
+    public bool bossCanSpawn = false;
     [SerializeField] EnemySpawning spawner;
 
     [Header("Upgrades")]
@@ -69,8 +72,13 @@ public class GameManager : MonoBehaviour
             immuneSystem.wideShot = true;
         }
 
+        if (currentScore >= bossEnemyPointsNeeded && !bossCanSpawn)
+        {
+            bossCanSpawn = true;
+        }
+
         // Check for win
-        if (currentScore >= winScore && !hasWon)
+        if (currentScore >= winScore && !hasWon && bossDefeated)
         {
             winScreen.SetActive(true);
             immuneSystem.health += immuneSystem.increasedHealth;

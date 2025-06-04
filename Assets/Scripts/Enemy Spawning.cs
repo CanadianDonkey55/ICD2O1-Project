@@ -10,6 +10,7 @@ public class EnemySpawning : MonoBehaviour
     public GameObject basicEnemyPrefab;
     public GameObject hardEnemyPrefab;
     public GameObject eliteEnemyPrefab;
+    public GameObject bossEnemyprefab;
     public GameObject currentSpawn;
 
     [Header("Spawn Settings")]
@@ -47,23 +48,37 @@ public class EnemySpawning : MonoBehaviour
         // Randomize which enemy type will spawn
         RandomSpawn();
 
-        // Instantiate 
+        // Instantiate if no boss spawning
         currentSpawn.GetComponent<Enemy>().gameManagerObject = gameManager.gameObject;
-        Instantiate(currentSpawn, spawnPosition, Quaternion.identity);
+        if (!gameManager.bossCanSpawn) 
+        { 
+            Instantiate(currentSpawn, spawnPosition, Quaternion.identity);
+        }
+
+        // If the boss can spawn, instantiate the boss enemy prefab
+        if (gameManager.bossCanSpawn)
+        {
+            Instantiate(currentSpawn, spawnPosition, Quaternion.identity);
+            gameManager.bossCanSpawn = false; // Reset the boss spawn flag after spawning
+        }
     }
 
     private void RandomSpawn()
     {
         int randomValue = Random.Range(0, eliteEnemySpawnChance);
 
-        if (randomValue <= basicEnemySpawnChance)
+        if (gameManager.bossCanSpawn)
+        {
+            currentSpawn = bossEnemyprefab;
+        }
+        else if (randomValue <= basicEnemySpawnChance)
         {
             currentSpawn = basicEnemyPrefab;
-        } 
+        }
         else if (randomValue <= hardEnemySpawnChance && randomValue > basicEnemySpawnChance && gameManager.hardEnemiesCanSpawn)
         {
             currentSpawn = hardEnemyPrefab;
-        } 
+        }
         else if (randomValue <= eliteEnemySpawnChance && randomValue > hardEnemySpawnChance && gameManager.eliteEnemiesCanSpawn)
         {
             currentSpawn = eliteEnemyPrefab;
